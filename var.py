@@ -25,7 +25,32 @@ registers = {
         {"send": True},
         {"value": ''}
     ],
-
+    32022: [
+        {"item": "PV4 Input Voltage"},
+        {"unit": "V"},
+        {"decimal": 1},
+        {"FUNC": 4},
+        {"send": True},
+        {"value": ''}
+    ],
+    # pv1
+    32024: [
+        {"item": "PV5 Input Voltage"},
+        {"unit": "V"},
+        {"decimal": 1},
+        {"FUNC": 4},
+        {"send": True},
+        {"value": ''}
+    ],
+    32026: [
+        # v2
+        {"item": "PV6 Input Voltage"},
+        {"unit": "V"},
+        {"decimal": 1},
+        {"FUNC": 4},
+        {"send": True},
+        {"value": ''}
+    ],
     32017: [
         {"item": "PV1 Input current"},
         {"unit": "A"},
@@ -44,6 +69,31 @@ registers = {
     ],
     32021: [
         {"item": "PV3 Input current"},
+        {"unit": "A"},
+        {"decimal": 2},
+        {"FUNC": 4},
+        {"send": True},
+        {"value": ''}
+    ],
+    
+    32023: [
+        {"item": "PV4 Input current"},
+        {"unit": "A"},
+        {"decimal": 2},
+        {"FUNC": 4},
+        {"send": True},
+        {"value": ''}
+    ],
+    32025: [
+        {"item": "PV5 Input current"},
+        {"unit": "A"},
+        {"decimal": 2},
+        {"FUNC": 4},
+        {"send": True},
+        {"value": ''}
+    ],
+    32027: [
+        {"item": "PV6 Input current"},
         {"unit": "A"},
         {"decimal": 2},
         {"FUNC": 4},
