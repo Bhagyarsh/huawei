@@ -7,7 +7,8 @@ from zip import extractall
 
 
 def update(path):
-    url = 'http://solardata2.tk/api/version/get/2'
+    datalogger = 4
+    url = 'http://solardata2.tk/api/version/get/' + str(datalogger)
     headers = {
         'content-type': "application/json",
     }
@@ -20,7 +21,7 @@ def update(path):
             print('no updates')
         else:
             print("downloadling ....")
-            url = "https://solardata2.tk/builds/{}/{}/program.zip".format(2,data['build'])
+            url = "https://solardata2.tk/builds/{}/{}/program.zip".format(datalogger,data['build'])
             print(url)
             download_file(url,path+'update.zip')
             extractall(path+'update.zip',path)

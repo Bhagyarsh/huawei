@@ -59,7 +59,7 @@ def initmodbusandread(i):
     try:
         if (registers.get(i)[4]["send"]) is True:
             print(i)
-            instrument = mb.Instrument('/dev/ttyS1', slave_id)
+            instrument = mb.Instrument('/dev/ttyUSB0', slave_id)
             instrument.serial.baudrate = 9600  # Baud
             instrument.serial.bytesize = 8
             instrument.serial.stopbits = 1
