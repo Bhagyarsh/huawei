@@ -2,43 +2,35 @@ import csv
 
 
 
-def setData(uid, slave_id, registers, timesend, vers):
+def setData(uid, slave_id, registers,registers2,  timesend, vers):
+    print("doem")
+    a = registers2.get(32064)[5]["value"]
+    total_power = a 
 
-    a = registers.get(32064)[5]["value"]
-    b = registers.get(32065)[5]["value"]
-    total_power = a + b
+    a = registers2.get(32078)[5]["value"]
+    Active_power_peak_of_current_day = a
 
-    a = registers.get(32078)[5]["value"]
-    b = registers.get(32078)[5]["value"]
-    Active_power_peak_of_current_day = a+b
+    a = registers2.get(32080)[5]["value"]
+    Active_power = a
 
-    a = registers.get(32080)[5]["value"]
-    b = registers.get(32081)[5]["value"]
-    Active_power = a + b
+    a = registers2.get(32082)[5]["value"]
+    Reactive_power = a
 
-    a = registers.get(32082)[5]["value"]
-    b = registers.get(32083)[5]["value"]
-    Reactive_power = a+b
+    a = registers2.get(32089)[5]["value"]
+    Device_status = a
 
-    a = registers.get(32089)[5]["value"]
-    b = registers.get(32089)[5]["value"]
-    Device_status = a+b
+    a = registers2.get(32106)[5]["value"]
+    totlal_energy_yeild = a
 
-    a = registers.get(32106)[5]["value"]
-    b = registers.get(32107)[5]["value"]
-    totlal_energy_yeild = a+b
+    a = registers2.get(32114)[5]["value"]
+    daily_energy = a
 
-    a = registers.get(32114)[5]["value"]
-    b = registers.get(32115)[5]["value"]
-    daily_energy = a+b
+    a = registers2.get(32118)[5]["value"]
 
-    a = registers.get(32118)[5]["value"]
-    b = registers.get(32119)[5]["value"]
-    energy_yeild_current_year = a+b
+    energy_yeild_current_year = a
 
-    a = registers.get(32116)[5]["value"]
-    b = registers.get(32117)[5]["value"]
-    energy_yeild_current_month = a+b
+    a = registers2.get(32116)[5]["value"]
+    energy_yeild_current_month = a
 
     data = {
         "uvid": uid,
@@ -120,42 +112,34 @@ def writecsv(file_name, data):
         w.writerow(data)
 
 
-def setCsvData(uid, slave_id, registers, timesend, vers):
-    a = registers.get(32064)[5]["value"]
-    b = registers.get(32065)[5]["value"]
-    total_power = a + b
+def setCsvData(uid, slave_id, registers,registers2, timesend, vers):
+    a = registers2.get(32064)[5]["value"]
+    total_power = a 
 
-    a = registers.get(32078)[5]["value"]
-    b = registers.get(32078)[5]["value"]
-    Active_power_peak_of_current_day = a+b
+    a = registers2.get(32078)[5]["value"]
+    Active_power_peak_of_current_day = a
 
-    a = registers.get(32080)[5]["value"]
-    b = registers.get(32081)[5]["value"]
-    Active_power = a + b
+    a = registers2.get(32080)[5]["value"]
+    Active_power = a
 
-    a = registers.get(32082)[5]["value"]
-    b = registers.get(32083)[5]["value"]
-    Reactive_power = a+b
+    a = registers2.get(32082)[5]["value"]
+    Reactive_power = a
 
-    a = registers.get(32089)[5]["value"]
-    b = registers.get(32089)[5]["value"]
-    Device_status = a+b
+    a = registers2.get(32089)[5]["value"]
+    Device_status = a
 
-    a = registers.get(32106)[5]["value"]
-    b = registers.get(32107)[5]["value"]
-    totlal_energy_yeild = a+b
+    a = registers2.get(32106)[5]["value"]
+    totlal_energy_yeild = a
 
-    a = registers.get(32114)[5]["value"]
-    b = registers.get(32115)[5]["value"]
-    daily_energy = a+b
+    a = registers2.get(32114)[5]["value"]
+    daily_energy = a
 
-    a = registers.get(32118)[5]["value"]
-    b = registers.get(32119)[5]["value"]
-    energy_yeild_current_year = a+b
+    a = registers2.get(32118)[5]["value"]
 
-    a = registers.get(32116)[5]["value"]
-    b = registers.get(32117)[5]["value"]
-    energy_yeild_current_month = a+b
+    energy_yeild_current_year = a
+
+    a = registers2.get(32116)[5]["value"]
+    energy_yeild_current_month = a
 
     sdata = {
         "uvid": uid,
