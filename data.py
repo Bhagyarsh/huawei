@@ -4,8 +4,10 @@ def return_int_value(a, b):
     a = hex(int(a))
     b = hex(int(b))
     print
-    if a == 0:
+    if a == 0 and b!= 0:
         hex_a = b[2:]
+    elif a==0 and b == 0 :
+   	 return 0
     else:
         hex_a = a + b[2:]
     return (int(hex_a, 0))
@@ -79,7 +81,7 @@ def setData(uid, slave_id, registers,registers2,  timesend, vers):
                 "Active_power":Active_power,
                 "Device_status":Device_status,
                 "Reactive_power":Reactive_power,
-                "Power_factor":int(registers.get(32084)[5]["value"]),
+                "Power_factor":int(registers.get(32084)[5]["value"])/10,
                 "Inverter_efficiency":int(registers.get(32086)[5]["value"])/100,
                 "Cabinet_temperature":int(registers.get(32087)[5]["value"])/10,
                 "vers": vers})
@@ -197,7 +199,7 @@ def setCsvData(uid, slave_id, registers,registers2, timesend, vers):
         "Active_power":Active_power,
         "Device_status":Device_status,
         "Reactive_power":Reactive_power,
-        "Power_factor":int(registers.get(32084)[5]["value"]),
+        "Power_factor":int(registers.get(32084)[5]["value"])/10,
         "Inverter_efficiency":int(registers.get(32086)[5]["value"])/100,
         "Cabinet_temperature":int(registers.get(32087)[5]["value"])/10,
         "vers": vers,

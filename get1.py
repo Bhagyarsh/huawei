@@ -38,7 +38,7 @@ if GSM:
     gsm = sim800(baudrate=9600, path="/dev/ttys1")
     gsm.requests.APN = "www"
 #slave_ids = find_slave_id()
-slave_ids = [1,2]
+slave_ids = [1]
 uid = str(getuvid())
 print(uid)
 path = '/root/orangepizerodelta/'
@@ -82,7 +82,7 @@ def initmodbusandread2(i):
             instrument.serial.timeout = 2  # seconds
             instrument.address = slave_id   # this is the slave address number
             instrument.mode = mb.MODE_RTU   # rtu or ascii mode
-            rearead_from_var2(i, instrument)
+            read_from_var2(i, instrument)
     except IOError:
         registers2.get(i)[5]["value"] = '0'
         print("Failed to read from instrument")
@@ -111,7 +111,7 @@ def read_from_var2(i, instrument):
     try:
         value = instrument.read_registers(
             i,
-            registers.get(i)[6]["regs"], 3)
+            registers2.get(i)[6]["regs"], 3)
         gpio.output(led, 1)
         time.sleep(0.1)
         print(i)
@@ -119,12 +119,12 @@ def read_from_var2(i, instrument):
         gpio.output(led, 0)
         time.sleep(0.1)
 
-        registers.get(i)[5]["value"] = value
+        registers2.get(i)[5]["value"] = value
         print(i)
         print(value)
         time.sleep(0.2)
     except:
-        registers.get(i)[5]["value"] = '0'
+        registers2.get(i)[5]["value"] = '0'
         print("can't read {} rig".format(i))
 
 def senddata(file_name, url, sdata, headers, data, vers):
@@ -178,7 +178,7 @@ while True:
             sdata = setCsvData(uid, slave_id, registers, registers2,timesend, vers)
             headers = {'Content-type': 'application/json'}
             senddata(file_name, url, sdata, headers, data, vers)
-        time.sleep(10*20)
+        time.sleep(10*30)
     except Exception as e:
         print(e)
         restart.reboot()
