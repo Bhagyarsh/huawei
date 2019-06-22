@@ -60,7 +60,7 @@ def initmodbusandread(i):
     try:
         if (registers.get(i)[4]["send"]) is True:
             print(i)
-            instrument = mb.Instrument('/dev/ttyS1', slave_id)
+            instrument = mb.Instrument('/dev/ttyUSB1', slave_id)
             instrument.serial.baudrate = 9600  # Baud
             instrument.serial.bytesize = 8
             instrument.serial.stopbits = 1
@@ -75,14 +75,14 @@ def initmodbusandread2(i):
     try:
         if (registers2.get(i)[4]["send"]) is True:
             print(i)
-            instrument = mb.Instrument('/dev/ttyS1', slave_id)
+            instrument = mb.Instrument('/dev/ttyUSB1', slave_id)
             instrument.serial.baudrate = 9600  # Baud
             instrument.serial.bytesize = 8
             instrument.serial.stopbits = 1
             instrument.serial.timeout = 2  # seconds
             instrument.address = slave_id   # this is the slave address number
             instrument.mode = mb.MODE_RTU   # rtu or ascii mode
-            rearead_from_var2(i, instrument)
+            read_from_var2(i, instrument)
     except IOError:
         registers2.get(i)[5]["value"] = '0'
         print("Failed to read from instrument")
@@ -110,29 +110,32 @@ def read(i, instrument):
         print("can't read {} rig".format(i))
 def read_from_var2(i, instrument):
     try:
+        print("----------------------")
+        print(i)
         value = instrument.read_registers(
             i,
-            registers.get(i)[6]["regs"], 3)
+            registers2.get(i)[6]["regs"], 3)
         # gpio.output(led, 1)
         # time.sleep(0.1)
         print(i)
-        # print(value)
+        print("pppppppppppppp")
+        print(value)
         # gpio.output(led, 0)
         # time.sleep(0.1)
 
-        registers.get(i)[5]["value"] = value
+        registers2.get(i)[5]["value"] = value
         print(i)
         print(value)
         time.sleep(0.2)
     except:
-        registers.get(i)[5]["value"] = '0'
+        registers2 .get(i)[5]["value"] = '0'
         print("can't read {} rig".format(i))
 
 def senddata(file_name, url, sdata, headers, data, vers):
     try:
         if internet_on():
             sentsavedata(file_name, temp_file="temp.csv", url=url, vers=vers)
-            gpio.output(led1, 1)
+            # gpio.output(led1, 1)
             time.sleep(0.1)
 
         print("near r")

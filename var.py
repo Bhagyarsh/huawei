@@ -112,7 +112,7 @@ registers = {
     32086: [
         {"item": "Inverter efficiency"},
         {"unit": "W"},
-        {"decimal": 100},
+        {"decimal": 0},
         {"FUNC": 4},
         {"send": True},
         {"value": ''}
@@ -120,7 +120,7 @@ registers = {
     32087: [
         {"item": "Cabinet temperature"},
         {"unit": "W"},
-        {"decimal": 100},
+        {"decimal": 0},
         {"FUNC": 4},
         {"send": True},
         {"value": ''}
@@ -128,7 +128,7 @@ registers = {
     32088: [
         {"item": "Insulation resistance"},
         {"unit": "W"},
-        {"decimal": 100},
+        {"decimal": 0},
         {"FUNC": 4},
         {"send": True},
         {"value": ''}

@@ -1,36 +1,53 @@
 import csv
 
+def return_int_value(a, b):
+    a = hex(int(a))
+    b = hex(int(b))
+    print
+    if a == 0:
+        hex_a = b[2:]
+    else:
+        hex_a = a + b[2:]
+    return (int(hex_a, 0))
 
 
 def setData(uid, slave_id, registers,registers2,  timesend, vers):
     print("doem")
     a = registers2.get(32064)[5]["value"]
-    total_power = a 
+    b = return_int_value(a[0],a[1])
+    total_power = b
 
     a = registers2.get(32078)[5]["value"]
-    Active_power_peak_of_current_day = a
+    b = return_int_value(a[0],a[1])
+    Active_power_peak_of_current_day = b/1000
 
     a = registers2.get(32080)[5]["value"]
-    Active_power = a
+    b = return_int_value(a[0],a[1])
+    Active_power = b/1000
 
     a = registers2.get(32082)[5]["value"]
-    Reactive_power = a
+    b = return_int_value(a[0],a[1])
+    Reactive_power = b/100
 
     a = registers2.get(32089)[5]["value"]
-    Device_status = a
+    b = return_int_value(a[0],a[1])
+    Device_status = b
 
     a = registers2.get(32106)[5]["value"]
-    totlal_energy_yeild = a
+    b = return_int_value(a[0],a[1])
+    totlal_energy_yeild = b/100
 
     a = registers2.get(32114)[5]["value"]
-    daily_energy = a
+    b = return_int_value(a[0],a[1])
+    daily_energy = b/100
 
     a = registers2.get(32118)[5]["value"]
-
-    energy_yeild_current_year = a
+    b = return_int_value(a[0],a[1])
+    energy_yeild_current_year = b/100
 
     a = registers2.get(32116)[5]["value"]
-    energy_yeild_current_month = a
+    b = return_int_value(a[0],a[1])
+    energy_yeild_current_month = b/100
 
     data = {
         "uvid": uid,
@@ -51,6 +68,7 @@ def setData(uid, slave_id, registers,registers2,  timesend, vers):
         "offline": 0,
         "recordedAt": timesend,
         "other": str({
+                "montly_energy": energy_yeild_current_month,
                 "pv4_voltage": int(registers.get(32022)[5]["value"]),
                 "pv5_voltage": int(registers.get(32024)[5]["value"]),
                 "pv6_voltage": int(registers.get(32026)[5]["value"]),
@@ -62,8 +80,8 @@ def setData(uid, slave_id, registers,registers2,  timesend, vers):
                 "Device_status":Device_status,
                 "Reactive_power":Reactive_power,
                 "Power_factor":int(registers.get(32084)[5]["value"]),
-                "Inverter_efficiency":int(registers.get(32086)[5]["value"]),
-                "Cabinet_temperature":int(registers.get(32087)[5]["value"]),
+                "Inverter_efficiency":int(registers.get(32086)[5]["value"])/100,
+                "Cabinet_temperature":int(registers.get(32087)[5]["value"])/10,
                 "vers": vers})
 
     }
@@ -103,6 +121,7 @@ def writecsv(file_name, data):
             "Inverter_efficiency",
             "Cabinet_temperature",
             "vers",
+            "montly_energy"
 
     ]
     print(data)
@@ -113,33 +132,42 @@ def writecsv(file_name, data):
 
 
 def setCsvData(uid, slave_id, registers,registers2, timesend, vers):
+    print("doem")
     a = registers2.get(32064)[5]["value"]
-    total_power = a 
+    b = return_int_value(a[0],a[1])
+    total_power = b
 
     a = registers2.get(32078)[5]["value"]
-    Active_power_peak_of_current_day = a
+    b = return_int_value(a[0],a[1])
+    Active_power_peak_of_current_day = b/1000
 
     a = registers2.get(32080)[5]["value"]
-    Active_power = a
+    b = return_int_value(a[0],a[1])
+    Active_power = b/1000
 
     a = registers2.get(32082)[5]["value"]
-    Reactive_power = a
+    b = return_int_value(a[0],a[1])
+    Reactive_power = b/100
 
     a = registers2.get(32089)[5]["value"]
-    Device_status = a
+    b = return_int_value(a[0],a[1])
+    Device_status = b
 
     a = registers2.get(32106)[5]["value"]
-    totlal_energy_yeild = a
+    b = return_int_value(a[0],a[1])
+    totlal_energy_yeild = b/100
 
     a = registers2.get(32114)[5]["value"]
-    daily_energy = a
+    b = return_int_value(a[0],a[1])
+    daily_energy = b/100
 
     a = registers2.get(32118)[5]["value"]
-
-    energy_yeild_current_year = a
+    b = return_int_value(a[0],a[1])
+    energy_yeild_current_year = b/100
 
     a = registers2.get(32116)[5]["value"]
-    energy_yeild_current_month = a
+    b = return_int_value(a[0],a[1])
+    energy_yeild_current_month = b/100
 
     sdata = {
         "uvid": uid,
@@ -159,6 +187,7 @@ def setCsvData(uid, slave_id, registers,registers2, timesend, vers):
         "pv1_power": total_power,
         "pv2_power": 0,
         "pv3_power":0,
+        "montly_energy": energy_yeild_current_month,
         "daily_energy":daily_energy,
         "total_energy":  totlal_energy_yeild,
         "annual_energy": energy_yeild_current_year,
@@ -169,9 +198,10 @@ def setCsvData(uid, slave_id, registers,registers2, timesend, vers):
         "Device_status":Device_status,
         "Reactive_power":Reactive_power,
         "Power_factor":int(registers.get(32084)[5]["value"]),
-        "Inverter_efficiency":int(registers.get(32086)[5]["value"]),
-        "Inverter_efficiency":int(registers.get(32086)[5]["value"]),
-        "vers": vers
+        "Inverter_efficiency":int(registers.get(32086)[5]["value"])/100,
+        "Cabinet_temperature":int(registers.get(32087)[5]["value"])/10,
+        "vers": vers,
+         "montly_energy": energy_yeild_current_month,
     }
 
 
