@@ -168,6 +168,7 @@ while True:
                 initmodbusandread(i)
             for i in registers2.keys():
                 initmodbusandread2(i)
+            file_name = uid + str(slave_id) +'.csv'
             timesend = str(dt.readTime().strftime("%Y-%m-%d %H:%M:%S"))
             # timesend = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             print(timesend)
